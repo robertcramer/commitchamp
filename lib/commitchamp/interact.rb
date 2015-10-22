@@ -31,11 +31,18 @@ module Commitchamp
       gets.chomp
     end
 
-    def show_contributers
-      print "Username       Additions      Deletions      Changes
-
-           "
+    def get_names(response)
+      names = response.map {|x| x["author"]["login"]}
     end
+
+    def get_info
+      #need additions, deletions, and changes for each user...
+    end
+
+
+
+
+
 
 
   end
