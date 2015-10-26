@@ -13,8 +13,23 @@ module Commitchamp
     def get_contributions
       response = Interact.get("/repos/#{get_owner}/#{get_repo}/stats/contributors",
                    :headers => @auth)
+
+      results= []
+      response.map do |response|
+        additions = 0
+        deletions = 0
+        commits = 0
+        weeks = response["weeks"]
+        weeks.map do |week|
+          additions += week["a"]
+          deletions += week["d"]
+          commits += week["c"]
+        end
+        results.push({login: response["author"]["login"], additions: additions, deletions: deletions, commits: commits})
+      end
       binding.pry
-    end
+      end
+
 
     def get_token
       puts "Please enter your authentication token:"
