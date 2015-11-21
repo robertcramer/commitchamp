@@ -27,9 +27,9 @@ module Commitchamp
         end
         @results.push({login: response["author"]["login"], additions: additions, deletions: deletions, commits: commits})
       end
-      printf("%-20s %-10s %-10s %-10s\n", "Username ", "Additions ", "Deletions ", "Commits")
+      printf("%-35s %-35s %-35s %-35s\n", "Username ", "Additions ", "Deletions ", "Commits")
       @results.each do |result|
-        printf("%-20s %-10s %-10s %-10s\n", "#{result[:login]}", "#{result[:additions]}", "#{result[:deletions]}", "#{result[:commits]}")
+        printf("%-35s %-35s %-35s %-35s\n", "#{result[:login]}", "#{result[:additions]}", "#{result[:deletions]}", "#{result[:commits]}")
       end
 
       end
