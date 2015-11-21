@@ -14,7 +14,7 @@ module Commitchamp
       response = Interact.get("/repos/#{get_owner}/#{get_repo}/stats/contributors",
                    :headers => @auth)
 
-      results= []
+      @results= []
       response.map do |response|
         additions = 0
         deletions = 0
@@ -25,10 +25,17 @@ module Commitchamp
           deletions += week["d"]
           commits += week["c"]
         end
-        results.push({login: response["author"]["login"], additions: additions, deletions: deletions, commits: commits})
+        @results.push({login: response["author"]["login"], additions: additions, deletions: deletions, commits: commits})
       end
-      binding.pry
+      printf("%-20s %-10s %-10s %-10s\n", "Username ", "Additions ", "Deletions ", "Commits")
+      @results.each do |result|
+        printf("%-20s %-10s %-10s %-10s\n", "#{result[:login]}", "#{result[:additions]}", "#{result[:deletions]}", "#{result[:commits]}")
       end
+
+      end
+
+
+
 
 
     def get_token

@@ -13,15 +13,14 @@ module Commitchamp
 
 
     def run
-      # Your code goes here...
-      binding.pry
+      @interact.get_contributions
+
     end
   end
 end
 
-int = Commitchamp::Interact.new
 
-binding.pry
 
-# app = Commitchamp::App.new(int)
-# app.run
+
+app = Commitchamp::App.new
+app.run
