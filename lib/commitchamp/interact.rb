@@ -27,12 +27,27 @@ module Commitchamp
         end
         @results.push({login: response["author"]["login"], additions: additions, deletions: deletions, commits: commits})
       end
+      sort_contributions
       printf("%-35s %-35s %-35s %-35s\n", "Username ", "Additions ", "Deletions ", "Commits")
-      @results.each do |result|
+      @sorted_contributions.each do |result|
         printf("%-35s %-35s %-35s %-35s\n", "#{result[:login]}", "#{result[:additions]}", "#{result[:deletions]}", "#{result[:commits]}")
       end
 
+    end
+
+    def sort_contributions
+      puts "How would you like to sort the contributions?"
+      puts "additions, deletions, or commits?"
+      answer = gets.chomp.downcase
+      until ["additions", "deletions", "commits"].include?(answer)
+        puts "please spell out fully what you would like to do"
+        answer = gets.chomp.downcase
       end
+      @sorted_contributions = @results.sort_by do |object|
+        object[answer.to_sym]
+      end
+      @sorted_contributions.reverse
+    end
 
 
 
